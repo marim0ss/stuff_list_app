@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+
+  <body>
+  
+  <style>
+  input {
+    width: 100%;
+    max-width: 400px; /* レスポンシブの場合の対策 */
+    box-sizing: border-box; /* [borde-box]で右の飛び出しを回避 */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  
+  textarea {
+    width: 100%;
+    max-width: 400px; 
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  
+  input[type="submit"]  {
+    max-width: 200px; /*送信ボタンの幅を指定*/
+  }
+  
+  table.input{
+    font-size: 2px;
+  }
+  #menu{
+    font-size : 20px;
+    border : 1px;
+    padding : 10px 20px 0px 0px;
+  }
+  
+</style>
+  
+  <div id='header-fixed'>
+    <font size="5pt" color="#5555ff">登録社員照会／変更　　</font>
+    <a id='menu' href="https://script.google.com/a/b-engineer.com/macros/s/AKfycbzV8XcsrhHaPP85avVnlmpPm09LNZ1eITpL7tzk7tRa8WaQE7s/exec?name=view" target="_top">社員一覧</a>
+  </div>
+
+<?
+    //パラメータリストから従業員Noを取得
+　  selectNo = getNo();
+    var id ="1QsqUcto1WbkA-eJQUgHz7mowJfJR4GUHXQB4rsmrNPQ";
+	var mySheet = SpreadsheetApp.openById(id).getSheetByName("data");
+	var endrow = mySheet.getLastRow();
+	var myData = mySheet.getRange(2, 1 , endrow-1 , 16).getValues();
+
+    y=0;
+	for(var i=0; i<myData.length; i++){
+	  //従業員Noが同じレコードを取り出し
+	  if (selectNo == myData[i][y]){
+          stuffNo =  myData[i][y];    //従業員No
+		  name = myData[i][y+1];      //氏名
+		  commit = myData[i][y+2];    //契約形態
+		  company = myData[i][y+3];   //所属会社
+		  payroll = myData[i][y+4];   //支払方法
+		  roll = myData[i][y+5];      //権限
+		  post = myData[i][y+6];      //役割
+		  profile = myData[i][y+7];   //プロフィール
+		  tag = myData[i][y+8];       //タグ
+		  avalable = myData[i][y+9];  //稼働可能時間帯
+		  address = myData[i][y+10];  //連絡用メールアドレス
+		  facebook = myData[i][y+11]; //Facebookアドレス
+		  ndadate = getViewDate(myData[i][y+12]);  //NDA締結日
+		  status = myData[i][y+13];   //契約状態
+		  tel = myData[i][y+14];      //電話番号
+		  remarks = myData[i][y+15];  //備考
+		  break;
+	  }
+	}
+    
+?>
+
+<form method='POST' action='<?=url?>/exec?name=modifyData' id='form' target="_top">
+<table border="1" cellspacing="0" cellpadding="5" bordercolor="#333333" id="input">
+<thead>
+  <tr bgcolor="#aaaaff">
+    <th>項目名</th><th>内容</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>従業員No</td><td><input type="text" name="stuffNo" size="20" maxlength="10" value="<?=stuffNo?>"  readonly="readonly"></td>
+  </tr>
+  <tr>
+    <td>氏名</td><td><input type="text" name="sname" size="40" maxlength="20" value="<?=name?>"></td>
+  </tr>
+  <tr>
+    <td>契約形態</td>
+	<td>
+        <select name="commit" id="commit">
+        <?
+        if(commit=="業務請負"){
+          output.append('<option value="業務請負" selected>業務請負</option>');
+        }else{
+          output.append('<option value="業務請負">業務請負</option>');
+        }
+        if(commit=="従業員"){
+          output.append('<option value="従業員" selected>従業員</option>');
+        }else{
+          output.append('<option value="従業員">従業員</option>');
+        }
+        if(commit=="インターン"){
+          output.append('<option value="インターン" selected>インターン</option>');
+        }else{
+          output.append('<option value="インターン">インターン</option>');
+        }
+        if(commit=="プロボノ"){
+          output.append('<option value="プロボノ" selected>プロボノ</option>');
+        }else{
+          output.append('<option value="プロボノ">プロボノ</option>');
+        }
+        ?>
+        </select>
+	</td>
+  </tr>
+  <tr>
+    <td>所属会社</td><td><input type="text" name="company" size="40" maxlength="20" value="<?=company?>"></td>
+  </tr>
+  <tr>
+    <td>支払方法</td>
+	<td>
+		<select name="payroll" id="payroll">
+        <?
+        if(payroll=="現金振込み"){
+          output.append('<option value="現金振込み" selected>現金振込み</option>');
+        }else{
+          output.append('<option value="現金振込み">現金振込み</option>');
+        }
+        if(payroll=="Amazonポイント"){
+          output.append('<option value="Amazonポイント" selected>Amazonポイント</option>');
+        }else{
+          output.append('<option value="Amazonポイント">Amazonポイント</option>');
+        }
+        if(payroll=="商品券"){
+          output.append('<option value="商品券" selected>商品券</option>');
+        }else{
+          output.append('<option value="商品券">商品券</option>');
+        }
+        if(payroll=="その他"){
+          output.append('<option value="その他" selected>その他</option>');
+        }else{
+          output.append('<option value="その他">その他</option>');
+        }
+        ?>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>権限</td>
+	<td>
+		<select name="roll">
+        <?
+        if(roll=="一般副業"){
+          output.append('<option value="一般副業" selected>一般副業</option>');
+        }else{
+          output.append('<option value="一般副業">一般副業</option>');
+        }
+        if(roll=="ボードメンバー"){
+          output.append('<option value="ボードメンバー" selected>ボードメンバー</option>');
+        }else{
+          output.append('<option value="ボードメンバー">ボードメンバー</option>');
+        }
+        ?>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td width="200">体制上の役割<br>(BA/経営企画/総務など)</td><td><input type="text" name="post" size="40" maxlength="20" value="<?=post?>"></td>
+  </tr>
+  <tr>
+    <td>プロフィール(URLなど)</td><td><input type="text" name="profile" size="240" maxlength="220" value="<?=profile?>"></td>
+  </tr>
+  <tr>
+    <td>タグ<br>(カンマ区切りで)</td><td><input type="text" name="tag" size="140" maxlength="120" value="<?=tag?>"></td>
+  </tr>
+  <tr>
+    <td>稼働可能時間</td>
+	<td>
+		<select name="avalable">
+        <?
+        if(roll=="平日のみ"){
+          output.append('<option value="平日のみ" selected>平日のみ</option>');
+        }else{
+          output.append('<option value="平日のみ">平日のみ</option>');
+        }
+        if(roll=="休日のみ"){
+          output.append('<option value="休日のみ" selected>休日のみ</option>');
+        }else{
+          output.append('<option value="休日のみ">休日のみ</option>');
+        }
+        if(roll=="平日夜間のみ"){
+          output.append('<option value="平日夜間のみ" selected>平日夜間のみ</option>');
+        }else{
+          output.append('<option value="平日夜間のみ">平日夜間のみ</option>');
+        }
+        if(roll=="いつでも"){
+          output.append('<option value="いつでも" selected>いつでも</option>');
+        }else{
+          output.append('<option value="いつでも">いつでも</option>');
+        }
+        if(roll=="調整次第"){
+          output.append('<option value="調整次第" selected>調整次第</option>');
+        }else{
+          output.append('<option value="調整次第">調整次第</option>');
+        }
+        ?>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>連絡用メールアドレス</td><td><input type="text" name="address" size="100" maxlength="80" value="<?=address?>"></td>
+  </tr>
+  <tr>
+    <td>Facebookアドレス</td><td><input type="text" name="facebook" size="100" maxlength="80" value=<?=facebook?>></td>
+  </tr>
+  <tr>
+    <td>NDA締結日</td><td><input type="text" name="ndadate" size="40" maxlength="20" value="<?=ndadate?>"></td>
+  </tr>
+  <tr>
+    <td>契約状態</td>
+	<td>
+		<select name="status">
+        <?
+        if(status=="稼動中"){
+          output.append('<option value="稼動中" selected>稼動中</option>');
+        }else{
+          output.append('<option value="稼動中">稼動中</option>');
+        }
+        if(status=="停止中"){
+          output.append('<option value="停止中" selected>停止中</option>');
+        }else{
+          output.append('<option value="停止中">停止中</option>');
+        }
+        if(status=="退職"){
+          output.append('<option value="退職" selected>退職</option>');
+        }else{
+          output.append('<option value="退職">退職</option>');
+        }
+        if(status=="解約"){
+          output.append('<option value="解約" selected>解約</option>');
+        }else{
+          output.append('<option value="調整次第">調整次第</option>');
+        }
+        if(status=="登録中"){
+          output.append('<option value="登録中" selected>登録中</option>');
+        }else{
+          output.append('<option value="登録中">登録中</option>');
+        }
+        ?>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>電話番号</td><td><input type="text" name="tel" size="40" maxlength="20" value="<?=tel?>"></td>
+  </tr>
+  <tr>
+    <td>備考</td><td><input type="text" name="remarks" size="40" maxlength="20" value="<?=remarks?>"></td>
+  </tr>
+</tbody>
+</table>
+<input type= 'submit' value="登録" id='botton'>
+</form>
+</body>
+</html>

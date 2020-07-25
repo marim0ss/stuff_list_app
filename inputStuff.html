@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <body>
+  
+  <style>
+  input {
+    width: 100%;
+    max-width: 400px; /* レスポンシブの場合の対策 */
+    box-sizing: border-box; /* [borde-box]で右の飛び出しを回避 */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  
+  textarea {
+    width: 100%;
+    max-width: 400px; 
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  
+  input[type="submit"]  {
+    max-width: 200px; /*送信ボタンの幅を指定*/
+  }
+  
+  table.input{
+    font-size: 2px;
+  }
+  #menu{
+    font-size : 20px;
+    border : 1px;
+    padding : 10px 20px 0px 0px;
+  }
+  
+  </style>
+<?
+  url = "https://script.google.com/a/b-engineer.com/macros/s/AKfycbzV8XcsrhHaPP85avVnlmpPm09LNZ1eITpL7tzk7tRa8WaQE7s";
+?>
+  
+  <div id='header-fixed'>
+    <font size="5pt" color="#5555ff">社員登録　　</font><a id='menu' href="<?=url?>/exec?name=view" target="_top">社員一覧</a>
+  </div>
+
+<form method='POST' action='<?=url?>/exec?name=postData' id='form' target="_top">
+<table border="1" cellspacing="0" cellpadding="5" bordercolor="#333333" id="input">
+<thead>
+  <tr bgcolor="#aaaaff">
+    <th>項目名</th><th>内容</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>氏名</td><td><input type="text" name="sname" size="40" maxlength="20"></td>
+  </tr>
+  <tr>
+    <td>契約形態</td>
+	<td>
+		<select name="commit">
+		<option value="業務請負">業務請負</option>
+		<option value="従業員">従業員</option>
+		<option value="インターン">インターン</option>
+		<option value="プロボノ">プロボノ</option>
+		</select>	  
+	</td>
+  </tr>
+  <tr>
+    <td>所属会社</td><td><input type="text" name="company" size="40" maxlength="20"></td>
+  </tr>
+  <tr>
+    <td>支払方法</td>
+	<td>
+		<select name="payroll">
+		<option value="現金振込み">現金振込み</option>
+		<option value="Amazonポイント">Amazonポイント</option>
+		<option value="商品券">商品券</option>
+		<option value="その他">その他</option>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>権限</td>
+	<td>
+		<select name="roll">
+		<option value="一般副業">一般副業</option>
+		<option value="ボードメンバー">ボードメンバー</option>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>体制上の役割</td><td><input type="text" name="post" size="40" maxlength="20"></td>
+  </tr>
+  <tr>
+    <td>プロフィール(URLなど)</td><td><input type="text" name="profile" size="140" maxlength="120"></td>
+  </tr>
+  <tr>
+    <td>スキル<br>(カンマ区切りで)</td><td><input type="text" name="tag" size="140" maxlength="120"></td>
+  </tr>
+  <tr>
+    <td>稼働可能時間</td>
+	<td>
+		<select name="avalable">
+		<option value="平日のみ">平日のみ</option>
+		<option value="休日のみ">休日のみ</option>
+		<option value="平日夜間のみ">平日夜間のみ</option>
+		<option value="いつでも">いつでも</option>
+		<option value="調整次第">調整次第</option>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>連絡用メールアドレス</td><td><input type="text" name="address" size="100" maxlength="80"></td>
+  </tr>
+  <tr>
+    <td>Facebookアドレス</td><td><input type="text" name="facebook" size="100" maxlength="80"></td>
+  </tr>
+  <tr>
+    <td>NDA締結日</td><td><input type="text" name="ndadate" size="40" maxlength="20"></td>
+  </tr>
+  <tr>
+    <td>契約状態</td>
+	<td>
+		<select name="status">
+		<option value="稼動中">稼動中</option>
+		<option value="停止中">停止中</option>
+		<option value="退職">退職</option>
+		<option value="解約">解約</option>
+		<option value="登録中">登録中</option>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>電話番号</td><td><input type="text" name="tel" size="40" maxlength="20"></td>
+  </tr>
+  <tr>
+    <td>備考</td><td><input type="text" name="remarks" size="40" maxlength="20"></td>
+  </tr>
+</tbody>
+</table>
+<input type= 'submit' value="登録" id='botton'>
+</form>
+</body>
+</html>

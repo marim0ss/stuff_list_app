@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+  <style>
+  #header-fixed{
+	border: 5px solid #fff;    /* 表示領域を白枠で囲う */
+    position: fixed;            /* ヘッダーの固定 */
+    padding:10px 0 20px;       /* 上10px、下20pxをあける */
+    top:  0px;                   /* 位置(上0px) */
+    left: 10px;                  /* 位置(右0px) */
+    width: 100%;                /* 横幅100%　*/
+    height:70px;                /* 縦幅70px */
+    background-color:#FFF      /* バックの色 */
+  }
+  #content{
+    top:  80px;                   /* 位置(上0px) */
+    left: 0px;                  /* 位置(右0px) */
+    padding:110px 0 0px;
+    width: 100%;                /* 横幅100%　*/
+    background-color: "#000000" /* バックの色 */
+  }
+  #menu{
+    font-size : 20px;
+    border : 1px;
+    padding : 10px 20px 0px 0px;
+  }
+  thead {
+    display: block;
+  }
+  tbody {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+</style>
+<?
+  url = "https://script.google.com/a/b-engineer.com/macros/s/AKfycbzV8XcsrhHaPP85avVnlmpPm09LNZ1eITpL7tzk7tRa8WaQE7s";
+?>
+  <div id='header-fixed'>
+    <font size="5pt" color="#5555ff">社員管理システム　　</font>
+    <a id='menu' href="<?=url?>/exec?name=view">再表示</a>
+    <a id='menu' href="<?=url?>/exec?name=inputStuff">社員登録</a>    
+<!--    <font size='5px'>　只今の時刻<span id="clock_time"></span>です。</font> -->
+  </div>
+<!-- ↑↑↑メニュー↑↑↑-->
+<script>
+function clock()
+{
+    // 現在日時を表すインスタンスを取得
+//    var now = new Date();
+//    document.getElementById("clock_time").innerHTML = now;
+}
+setInterval(clock, 1000);
+</script>
+      <?
+        myMail = Session.getActiveUser().getEmail();
+        output.append('<font size="2px" color="#5555ff">ログインユーザー：');
+        output.append(myMail);
+        output.append('</font>');
+      ?>
+  <div id='content'>
+      <?
+        //スタッフリストのスプレッドIDを指定
+　　     var id ="1QsqUcto1WbkA-eJQUgHz7mowJfJR4GUHXQB4rsmrNPQ";
+    　　 var mySheet = SpreadsheetApp.openById(id).getSheetByName("data");
+        var endrow = mySheet.getLastRow();
+        var headData = mySheet.getRange("A1:N1").getValues();
+        var myData = mySheet.getRange(2, 1 , endrow-1 , 14).getValues();
+        output.append('<table border="1" cellspacing="0" cellpadding="5" bordercolor="#333333" style="table-layout:fixed;width:100%;">');
+        output.append('<thead><div fixed>');
+        output.append('<colgroup>');
+        output.append('<col style="width:3%;"><col style="width:7%;"><col><col><col><col><col><col style="width:20%;"><col style="width:10%;"><col><col style="width:10%;"><col style="width:15%;"><col style="width:5%;"><col>');
+        output.append('</colgroup>');
+        output.append('<tr>');
+        headprefix = '<th bgcolor="#5555ff"><font color="#FFFFFF" size="2px">';
+        headbackfix = '</font></th>';
+        
+        //ヘッダー情報取得
+        no = headData[0][0];
+        name = headData[0][1];
+        commit = headData[0][2];
+        company = headData[0][3];
+        payroll = headData[0][4];
+        roll = headData[0][5];
+        post = headData[0][6];
+        profile = headData[0][7];
+        tag = headData[0][8];
+        avalable = headData[0][9];
+        address = headData[0][10];
+        facebook = headData[0][11];
+        ndadate = headData[0][12];
+        status = headData[0][13];
+        
+        //テーブルヘッダー作成
+        output.append(headprefix + no + headbackfix);
+        output.append(headprefix + name + headbackfix);
+        output.append(headprefix + commit + headbackfix);
+        output.append(headprefix + company + headbackfix);
+        output.append(headprefix + payroll + headbackfix);
+        output.append(headprefix + roll + headbackfix);
+        output.append(headprefix + post + headbackfix);
+        output.append(headprefix + profile + headbackfix);
+        output.append(headprefix + tag + headbackfix);
+        output.append(headprefix + avalable + headbackfix);
+        output.append(headprefix + address + headbackfix);
+        output.append(headprefix + facebook + headbackfix);
+        output.append(headprefix + ndadate + headbackfix);
+        output.append(headprefix + status + headbackfix);
+        output.append('</tr>');
+        output.append('</thead></div>');
+        
+        //テーブルボディの作成
+        output.append('<tbody>');
+        y=0;
+        for(var i=0; i<myData.length; i++){
+          no = myData[i][y];
+          name = myData[i][y+1];
+          commit = myData[i][y+2];
+          company = myData[i][y+3];
+          payroll = myData[i][y+4];
+          roll = myData[i][y+5];
+          post = myData[i][y+6];
+          profile = myData[i][y+7];
+          tag = myData[i][y+8];
+          avalable = myData[i][y+9];
+          address = myData[i][y+10];
+          facebook = myData[i][y+11];
+          ndadate = myData[i][y+12];
+          status = myData[i][y+13];
+          
+　　　　　　headprefix = '<td style="word-wrap:break-word;"><font color="#000000" size="1px">';
+          headbackfix = '</font></td>';
+          
+          if (status === "解約" || status === "退職"){
+            output.append('<tr bgcolor = "#333333">');
+          }else if(status === "停止中"){
+            output.append('<tr bgcolor = "#AAAAAA">');
+          }else{
+            output.append('<tr bgcolor = "#FFFFFF">');
+          }
+          output.append(headprefix + no + headbackfix);
+          output.append(headprefix + getModifyUrl(no,name) + headbackfix);
+          output.append(headprefix + commit + headbackfix);
+          output.append(headprefix + company + headbackfix);
+          output.append(headprefix + payroll + headbackfix);
+          output.append(headprefix + roll + headbackfix);
+          output.append(headprefix + post + headbackfix);
+          output.append(headprefix + getLink(profile) + headbackfix);
+          output.append(headprefix + tag + headbackfix);
+          output.append(headprefix + avalable + headbackfix);
+          output.append(headprefix + getMailAddress(address) + headbackfix);
+          output.append(headprefix + getLink(facebook) + headbackfix);
+          output.append(headprefix + getViewDate(ndadate) + headbackfix);
+          output.append(headprefix + status + headbackfix);
+          output.append('</tr>');
+        }
+        output.append('</tbody>');
+        output.append('</table>');
+      ?>
+      <?
+        //上記から参照する関数群
+        function escape_html (string) {
+          if(typeof string !== 'string') {
+            return string;
+          }
+          return string.replace(/[&'`"<>]/g, function(match) {
+          return {
+          '&': '&amp;',
+          "'": '&#x27;',
+          '`': '&#x60;',
+          '"': '&quot;',
+          '<': '&lt;',
+          '>': '&gt;',
+          }[match]
+          });
+        }
+
+        //修正画面リンクを埋め込む関数
+        function getModifyUrl (no, name) {
+          var modifyUrl = url + "/exec?name=modify&no=" + no;
+          return '<a href="' + modifyUrl + '" target="_top">' + name + '</a>';
+        };
+
+　　　　　//URLリンクを埋め込む関数
+        function getLink (stringUrl) {
+          var pattern = 'http';
+          if(stringUrl.indexOf(pattern) === 0){
+            return '<a href="' + stringUrl + '" target="_blank">' + stringUrl + '</a>';
+          }else{
+            return stringUrl;
+          }
+        };
+
+        //メールリンクを埋め込む関数
+        function getMailAddress (stringMail) {
+          if(stringMail.indexOf('@') != -1){
+            return '<a href="mailto:' + stringMail + '">' + stringMail + '</a>';
+          }else{
+            return stringMail;
+          }
+        };
+
+  ?>
+    </div>
+</body>
+</html>
