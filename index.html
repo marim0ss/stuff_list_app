@@ -56,9 +56,9 @@ setInterval(clock, 1000);
 </script>
       <?
         myMail = Session.getActiveUser().getEmail();
-        output.append('<font size="2px" color="#5555ff">ログインユーザー：');
-        output.append(myMail);
-        output.append('</font>');
+        output._ ='<font size="2px" color="#5555ff">ログインユーザー：';
+        output._ =myMail;
+        output._ ='</font>';
       ?>
   <div id='content'>
       <?
@@ -68,12 +68,12 @@ setInterval(clock, 1000);
         var endrow = mySheet.getLastRow();
         var headData = mySheet.getRange("A1:N1").getValues();
         var myData = mySheet.getRange(2, 1 , endrow-1 , 14).getValues();
-        output.append('<table border="1" cellspacing="0" cellpadding="5" bordercolor="#333333" style="table-layout:fixed;width:100%;">');
-        output.append('<thead><div fixed>');
-        output.append('<colgroup>');
-        output.append('<col style="width:3%;"><col style="width:7%;"><col><col><col><col><col><col style="width:20%;"><col style="width:10%;"><col><col style="width:10%;"><col style="width:15%;"><col style="width:5%;"><col>');
-        output.append('</colgroup>');
-        output.append('<tr>');
+        output._ ='<table border="1" cellspacing="0" cellpadding="5" bordercolor="#333333" style="table-layout:fixed;width:100%;">';
+        output._ ='<thead><div fixed>';
+        output._ ='<colgroup>';
+        output._ ='<col style="width:3%;"><col style="width:7%;"><col><col><col><col><col><col style="width:20%;"><col style="width:10%;"><col><col style="width:10%;"><col style="width:15%;"><col style="width:5%;"><col>';
+        output._ ='</colgroup>';
+        output._ ='<tr>';
         headprefix = '<th bgcolor="#5555ff"><font color="#FFFFFF" size="2px">';
         headbackfix = '</font></th>';
         
@@ -94,25 +94,25 @@ setInterval(clock, 1000);
         status = headData[0][13];
         
         //テーブルヘッダー作成
-        output.append(headprefix + no + headbackfix);
-        output.append(headprefix + name + headbackfix);
-        output.append(headprefix + commit + headbackfix);
-        output.append(headprefix + company + headbackfix);
-        output.append(headprefix + payroll + headbackfix);
-        output.append(headprefix + roll + headbackfix);
-        output.append(headprefix + post + headbackfix);
-        output.append(headprefix + profile + headbackfix);
-        output.append(headprefix + tag + headbackfix);
-        output.append(headprefix + avalable + headbackfix);
-        output.append(headprefix + address + headbackfix);
-        output.append(headprefix + facebook + headbackfix);
-        output.append(headprefix + ndadate + headbackfix);
-        output.append(headprefix + status + headbackfix);
-        output.append('</tr>');
-        output.append('</thead></div>');
+        output._ =headprefix + no + headbackfix;
+        output._ =headprefix + name + headbackfix;
+        output._ =headprefix + commit + headbackfix;
+        output._ =headprefix + company + headbackfix;
+        output._ =headprefix + payroll + headbackfix;
+        output._ =headprefix + roll + headbackfix;
+        output._ =headprefix + post + headbackfix;
+        output._ =headprefix + profile + headbackfix;
+        output._ =headprefix + tag + headbackfix;
+        output._ =headprefix + avalable + headbackfix;
+        output._ =headprefix + address + headbackfix;
+        output._ =headprefix + facebook + headbackfix;
+        output._ =headprefix + ndadate + headbackfix;
+        output._ =headprefix + status + headbackfix;
+        output._ ='</tr>';
+        output._ ='</thead></div>';
         
         //テーブルボディの作成
-        output.append('<tbody>');
+        output._ ='<tbody>';
         y=0;
         for(var i=0; i<myData.length; i++){
           no = myData[i][y];
@@ -134,30 +134,30 @@ setInterval(clock, 1000);
           headbackfix = '</font></td>';
           
           if (status === "解約" || status === "退職"){
-            output.append('<tr bgcolor = "#333333">');
+            output._ ='<tr bgcolor = "#333333">';
           }else if(status === "停止中"){
-            output.append('<tr bgcolor = "#AAAAAA">');
+            output._ ='<tr bgcolor = "#AAAAAA">';
           }else{
-            output.append('<tr bgcolor = "#FFFFFF">');
+            output._ ='<tr bgcolor = "#FFFFFF">';
           }
-          output.append(headprefix + no + headbackfix);
-          output.append(headprefix + getModifyUrl(no,name) + headbackfix);
-          output.append(headprefix + commit + headbackfix);
-          output.append(headprefix + company + headbackfix);
-          output.append(headprefix + payroll + headbackfix);
-          output.append(headprefix + roll + headbackfix);
-          output.append(headprefix + post + headbackfix);
-          output.append(headprefix + getLink(profile) + headbackfix);
-          output.append(headprefix + tag + headbackfix);
-          output.append(headprefix + avalable + headbackfix);
-          output.append(headprefix + getMailAddress(address) + headbackfix);
-          output.append(headprefix + getLink(facebook) + headbackfix);
-          output.append(headprefix + getViewDate(ndadate) + headbackfix);
-          output.append(headprefix + status + headbackfix);
-          output.append('</tr>');
+          output._ =headprefix + no + headbackfix;
+          output._ =headprefix + getModifyUrl(no,name) + headbackfix;
+          output._ =headprefix + commit + headbackfix;
+          output._ =headprefix + company + headbackfix;
+          output._ =headprefix + payroll + headbackfix;
+          output._ =headprefix + roll + headbackfix;
+          output._ =headprefix + post + headbackfix;
+          output._ =headprefix + getLink(profile) + headbackfix;
+          output._ =headprefix + tag + headbackfix;
+          output._ =headprefix + avalable + headbackfix;
+          output._ =headprefix + getMailAddress(address) + headbackfix;
+          output._ =headprefix + getLink(facebook) + headbackfix;
+          output._ =headprefix + getViewDate(ndadate) + headbackfix;
+          output._ =headprefix + status + headbackfix;
+          output._ ='</tr>';
         }
-        output.append('</tbody>');
-        output.append('</table>');
+        output._ ='</tbody>';
+        output._ ='</table>';
       ?>
       <?
         //上記から参照する関数群
