@@ -37,6 +37,9 @@
   }
   
 </style>
+<?
+  url = "https://script.google.com/a/b-engineer.com/macros/s/AKfycbzV8XcsrhHaPP85avVnlmpPm09LNZ1eITpL7tzk7tRa8WaQE7s";
+?>
   
   <div id='header-fixed'>
     <font size="5pt" color="#5555ff">登録社員照会／変更　　</font>
@@ -46,8 +49,8 @@
 <?
     //パラメータリストから従業員Noを取得
 　  selectNo = getNo();
-    var id ="1QsqUcto1WbkA-eJQUgHz7mowJfJR4GUHXQB4rsmrNPQ";
-	var mySheet = SpreadsheetApp.openById(id).getSheetByName("data");
+    var id = '1QsqUcto1WbkA-eJQUgHz7mowJfJR4GUHXQB4rsmrNPQ';
+	var mySheet = SpreadsheetApp.openById(id).getSheetByName('data');
 	var endrow = mySheet.getLastRow();
 	var myData = mySheet.getRange(2, 1 , endrow-1 , 16).getValues();
 

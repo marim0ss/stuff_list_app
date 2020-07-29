@@ -9,6 +9,7 @@ var mail = objUser.getEmail();
 //タイムスタンプ
 var time = Utilities.formatDate( new Date(), 'Asia/Tokyo', 'yyyy/MM/dd HH:mm:ss');
 
+//var url = PropertiesService.getScriptProperties().getProperty("App_url");
 var selectNo;
 function doPost(e){
     doGet(e);
@@ -27,7 +28,7 @@ function doGet(e){
     return HtmlService.createTemplateFromFile("inputStuff").evaluate(); 
   }else if (e.parameter.name == 'modify'){
     selectNo = e.parameter.no;
-    return HtmlService.createTemplateFromFile("modify").evaluate(); 
+    return HtmlService.createTemplateFromFile("modify").evaluate();
   }else if (e.parameter.name == 'postData'){
     //値の取得・設定
     no = sheet.getLastRow()-1;
